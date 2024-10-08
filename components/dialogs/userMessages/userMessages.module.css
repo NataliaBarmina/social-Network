@@ -1,12 +1,12 @@
 .container {
     display: flex;
-    margin-bottom: 30px;
+    margin-bottom: 2.2rem;
 }
 
 .avatar {
-    height: 130px;
-    width: 130px;
-    margin-bottom: 10px;
+    height: 7vw;
+    width: 7vw;
+    margin-bottom: 0.6rem;
 }
 
 .avatar img {
@@ -18,15 +18,16 @@
 }
 
 .name {
-    font-size: 20px;
+    font-size: 1.1rem;
     text-align: center;
 }
 
 .message {
     background-color: rgb(201, 247, 232);
-    padding: 20px;
+    padding: 1.5rem;
     border: 3px solid rgb(150, 179, 170);
-    border-radius: 30px;
-    width: 80%;
-    margin-left: 30px;
+    border-radius: 1.5rem;
+    width: 70%;
+    height: 5vw;
+    margin-left: 2rem;
 }
