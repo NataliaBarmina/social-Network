@@ -1,0 +1,16 @@
+.appWrapper {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    'navbar profile';
+  grid-template-rows: 80px 1fr;
+  grid-template-columns: 2fr 8fr;
+  margin: 0px 200px 0px 200px;
+}
+
+.appWrapperContent {
+  grid-area: profile;
+  box-shadow:
+    0 0 0 5px rgb(158, 219, 243),
+    0 0 10px 5px rgb(158, 219, 243);
+}

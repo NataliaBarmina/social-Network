@@ -1,0 +1,13 @@
+.name {
+    margin-bottom: 60px;
+    font-size: 25px;
+}
+
+.name a {
+    color: black;
+    text-decoration: none;
+}
+
+.name a:hover {
+    color: blueviolet;
+}

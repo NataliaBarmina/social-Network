@@ -1,0 +1,16 @@
+.link {
+    display: flex;
+    padding-bottom: 15px;
+}
+
+.iconContainer {
+    height: 28px;
+    width: 28px;
+    margin-right: 15px;
+}
+
+.iconContainer img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}

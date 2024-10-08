@@ -1,0 +1,24 @@
+.navbar {
+    grid-area: navbar;
+    background-color: rgb(150, 179, 170);
+    padding: 60px 0 0 40px;
+    box-shadow:
+        0 0 0 5px rgb(158, 219, 243),
+        0 0 10px 5px rgb(158, 219, 243);
+    font-size: 25px;
+    opacity: 0.8;
+    margin-right: 25px;
+}
+
+.link {
+    margin-bottom: 40px;
+}
+
+.link a {
+    color: black;
+    text-decoration: none;
+}
+
+.link a:hover {
+    color: blueviolet
+}

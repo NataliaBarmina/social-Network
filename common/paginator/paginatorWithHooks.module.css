@@ -1,0 +1,19 @@
+.selected {
+    font-weight: bolder;
+    background-color: chartreuse;
+}
+
+.button,
+.pages {
+    display: inline-block;
+}
+
+.pageNumber {
+    padding: 4px;
+    display: inline-block;
+    color: darkblue;
+}
+
+.red {
+    background-color: red;
+}
