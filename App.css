@@ -3,9 +3,9 @@
   grid-template-areas:
     "header header"
     'navbar profile';
-  grid-template-rows: 80px 1fr;
+  grid-template-rows: 5rem 1fr;
   grid-template-columns: 2fr 8fr;
-  margin: 0px 200px 0px 200px;
+  margin: 0rem 12rem 0rem 12rem;
 }
 
 .appWrapperContent {
