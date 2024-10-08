@@ -1,6 +1,6 @@
 .header {
     grid-area: header;
-    margin-bottom: 28px;
+    margin-bottom: 2rem;
 }
 
 .header img {
