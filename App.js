@@ -7,7 +7,7 @@ import Preloader from "./common/preloader/preloader.jsx";
 import { Navigate } from "react-router-dom";
 
 import NavBar from "./components/navbar/navbar.jsx";
-import Profile from "./components/profile/profile/profile.jsx";
+import Profile from "./components/profile/profile.jsx";
 import HeaderContainer from "./components/header/headerContainer.jsx";
 import { withSuspense } from "./components/hoc/withSuspense.js";
 

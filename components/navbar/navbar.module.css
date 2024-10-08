@@ -1,17 +1,17 @@
 .navbar {
     grid-area: navbar;
     background-color: rgb(150, 179, 170);
-    padding: 60px 0 0 40px;
+    padding: 3rem 0 0 3rem;
     box-shadow:
         0 0 0 5px rgb(158, 219, 243),
         0 0 10px 5px rgb(158, 219, 243);
-    font-size: 25px;
+    font-size: 1.5rem;
     opacity: 0.8;
-    margin-right: 25px;
+    margin-right: 2rem;
 }
 
 .link {
-    margin-bottom: 40px;
+    margin-bottom: 4rem;
 }
 
 .link a {
