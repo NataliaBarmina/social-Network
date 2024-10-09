@@ -9,27 +9,32 @@ const ProfileStatusWithHooks = ({ status, updateStatus }) => {
         setStatus(status);
     }, [status])
 
-    const activateEditMode = () => {
+    const activateEditMode = () => { // метод вкл режим редактирования 
         setEditMode(true)
     }
 
-    const deActiveEditMode = () => {
+    const deActiveEditMode = () => {  // создаем метод выключающий режим редактирования
         setEditMode(false)
         updateStatus(newStatus)
     }
 
-    const onStatusChange = (event) => {
+    const onStatusChange = (event) => { // при обновлении инпута сетаем посимвольно в локальный state
         setStatus(event.currentTarget.value)
     }
 
     return (
         <div>
-            {!editMode &&
+            {!editMode &&     // если editMode равно false, отрисовываем <div…
                 <div onClick={activateEditMode}>{status || 'введите статус'}</div>
             }
-            {editMode &&
+            {editMode &&      // если editMode равно true, отрисовываем <input…
                 <div>
-                    <input autoFocus onChange={onStatusChange} onBlur={deActiveEditMode} value={newStatus} />
+                    <input
+                        autoFocus
+                        onChange={onStatusChange}  // при обновлении инпута сетаем посимвольно в локальный state
+                        onBlur={deActiveEditMode}  //убираем фокус и обновляем глобальный стэйт (сетаем из локального)
+                        value={newStatus}          // берем значение инпута из локального стэйта
+                    />
                 </div>
             }
         </div>

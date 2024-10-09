@@ -1,5 +1,4 @@
 import React from "react";
-
 import ProfileViewContainer from "./profileView/profileViewContainer";
 import PostFormContainer from "./myPosts/postFormContainer";
 

@@ -3,10 +3,10 @@ import { Field, reduxForm } from "redux-form";
 import { Textarea } from "../../common/formsControls/formControls";
 import { maxLengthCreator, required } from "../../utils/validators/validators";
 
-const MyMessage = (props) => {
+const MyMessage = ({ handleSubmit }) => {
     const maxLength50 = maxLengthCreator(50)
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div><Field placeholder="Enter your message" name={'myMessage'} component={Textarea} validate={[required, maxLength50]} /></div>
             <button>Send</button>
         </form>
@@ -15,10 +15,10 @@ const MyMessage = (props) => {
 
 const MessageReduxForm = reduxForm({ form: "myMessage" })(MyMessage)
 
-const CreateMyMessage = (props) => {
+const CreateMyMessage = ({ sendMessageCreator }) => {
 
     const addNewMessage = (values) => {
-        props.sendMessageCreator(values.myMessage);
+        sendMessageCreator(values.myMessage);
     }
     return (
         <div>

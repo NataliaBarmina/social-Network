@@ -1,17 +1,18 @@
 import React, { Suspense, lazy } from "react";
-import './App.css';
+import { withSuspense } from "./components/hoc/withSuspense.js";
+
 import { Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 import { initializeApp } from "./REDUX/reducers/appReducer.js";
-import Preloader from "./common/preloader/preloader.jsx";
 import { Navigate } from "react-router-dom";
 
+import Preloader from "./common/preloader/preloader.jsx";
 import NavBar from "./components/navbar/navbar.jsx";
 import Profile from "./components/profile/profile.jsx";
 import HeaderContainer from "./components/header/headerContainer.jsx";
-import { withSuspense } from "./components/hoc/withSuspense.js";
+import './App.css';
 
-const Login = withSuspense(lazy(() => import("./components/login/login.jsx")));
+const Login = withSuspense(lazy(() => import("./components/login/login.jsx")));// так работает когда используется <Routes/>
 const Messages = withSuspense(lazy(() => import("./components/messages/messages.jsx")));
 const UsersContainer = withSuspense(lazy(() => import("./components/users/usersContainer.jsx")));
 const Dialog = withSuspense(lazy(() => import("./components/dialogs/dialog.jsx")));
@@ -23,17 +24,17 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.props.initializeApp();
-    window.addEventListener('unhandledrejection', this.catchAllUnHandleErrors)
+    this.props.initializeApp();// инициализация Арр
+    window.addEventListener('unhandledrejection', this.catchAllUnHandleErrors)//ловим глобальную ошибку
 
   }
   componentWillUnmount() {
-    window.removeEventListener('unhandledrejection', this.catchAllUnHandleErrors)
+    window.removeEventListener('unhandledrejection', this.catchAllUnHandleErrors)//при демонтаже компоненты отписываемся от события. ОБЯЗАТЕЛЬНО!!!
   }
 
   render() {
 
-    if (!this.props.initialized) {
+    if (!this.props.initialized) { // если нет инициализации - показываем картинку загрузки
       return <Preloader />
     }
 
@@ -44,9 +45,10 @@ class App extends React.Component {
           <NavBar links={this.props.links} />
 
           <div className="appWrapperContent">
-            <Suspense fallback={Preloader}>
+            <Suspense fallback={Preloader}> {/*показывается элемент, пока происходит загрузка компонента */}
+
               <Routes>
-                <Route path='/profile/:userId?' element={<Profile />} />
+                <Route path='/profile/:userId?' element={<Profile />} /> {/* получаем идишник пользователя*/}
                 <Route path='/login' element={<Login />} />
                 <Route path='/users' element={<UsersContainer />} />
                 <Route path='/messages' element={<Messages />} />
@@ -55,7 +57,6 @@ class App extends React.Component {
                 {/*переход по умолчанию: */}
                 <Route path="/" element={<Navigate to={'/profile'} />} />
                 <Route path="*" element={<div>404 NOT FOUND</div>} />
-
 
               </Routes>
             </Suspense>

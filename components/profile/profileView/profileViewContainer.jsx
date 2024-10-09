@@ -1,27 +1,29 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { getProfileUser, getStatus, updateStatus, savePhoto, saveProfile, addError } from '../../../REDUX/reducers/profileReducer'
-import ProfileViewWithHooks from "./profileViewWithHooks";
+
 import { useParams } from "react-router-dom";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
-import { compose } from "redux";
+import ProfileViewWithHooks from "./profileViewWithHooks";
 
-export function withRouter(Children) {
+
+export function withRouter(Children) { //создаем hoc, оборачиваем ребенка - View
     return (props) => {
-        const match = { params: useParams() };
-        return <Children {...props} match={match} />
+        const match = { params: useParams() };       // получаем набор параметров маршрута
+        return <Children {...props} match={match} /> // передаем набор праметров маршрута и пропсы
     }
 }
 
-class View extends PureComponent {
+class View extends PureComponent { //пропускает повторные рендеринги для тех же пропсов и состояний
 
     refreshProfile() {
-        let userId = this.props.match.params.userId;
+        let userId = this.props.match.params.userId; // получаем Id из маршрута
 
         if (!userId) {
-            userId = this.props.authorizedUserId;
+            userId = this.props.authorizedUserId; // если нет Id из маршрута - получаем из стэйта
             if (!userId) {
-                this.props.history.push('/login');
+                this.props.history.push('/login'); // если нет в стэйте - отправляем на регистрацию
             }
         }
         this.props.getProfileUser(userId)
@@ -37,7 +39,6 @@ class View extends PureComponent {
             this.refreshProfile()
         }
     }
-
 
     render() {
 
@@ -66,7 +67,7 @@ let mapStateToProps = (state) => ({
 
 export default compose(
     connect(mapStateToProps, { getProfileUser, getStatus, updateStatus, savePhoto, saveProfile, addError }),
-    withRouter,
-    WithAuthRedirect
+    withRouter,        // hoc для получения параметров маршрута
+    WithAuthRedirect   // hoc переправляет на /login, если нет аутентификации
 )(View)
 

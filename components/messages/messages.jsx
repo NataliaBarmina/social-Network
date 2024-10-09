@@ -7,12 +7,12 @@ import { connect } from "react-redux";
 import CreateMyMessage from "./createMyMessage";
 
 
-const Messages = (props) => {
+const Messages = ({ usersMessages, sendMessageCreator }) => {
 
     return (
         <div>
-            <UserMessages usersMessages={props.usersMessages} />
-            <CreateMyMessage sendMessageCreator={props.sendMessageCreator} />
+            <UserMessages usersMessages={usersMessages} />
+            <CreateMyMessage sendMessageCreator={sendMessageCreator} />
         </div>
     )
 }
@@ -25,5 +25,5 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, { sendMessageCreator }),
-    WithAuthRedirect
+    WithAuthRedirect      //если нет аутентификации - переход на /login
 )(Messages)
