@@ -21,10 +21,11 @@ const appReducer = (state = initialState, action) => {
 
 export const initializedSuccess = () => ({ type: INITIALIZED_SUCCESS })
 
-export const initializeApp = () => (dispatch) => {
-    let promise = dispatch(authUser());
+export const initializeApp = () => (dispatch) => {// нужно дождаться данных, что пользователь зарегистрирован, а только потом что-то диспатчить 
+
+    let promise = dispatch(authUser());    // диспатч возвращает, то что мы ретурним в authUser, а это промис
     promise.then(() => {
-        dispatch(initializedSuccess());
+        dispatch(initializedSuccess());    // когда  диспатч вернул промис то диспатчим АС
     })
 }
 

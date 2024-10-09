@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-    withCredentials: true,
+    withCredentials: true,  // объект настройки запроса, т.е мы отправляем авторизационную cookie 
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
         'API-KEY': "9d79ac28-606f-4757-89d4-f55d9bea2fa4"
