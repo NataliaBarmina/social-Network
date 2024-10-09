@@ -15,13 +15,18 @@ const User = ({ userId, name, photoUser, followed, followingProgress, unFollowUs
                     </NavLink>
                 </div>
                 <div className={css.button}>
-                    {followed
-                        ? <button disabled={followingProgress.some(id => id === userId)} onClick={() => {
-                            unFollowUser(userId);
-                        }}>Un follow</button>
-                        : <button disabled={followingProgress.some(id => id === userId)} onClick={() => {
-                            followUser(userId);
-                        }} >Follow </button>}
+
+                    {followed     // если пользователь подписан
+                        ? <button
+                            disabled={followingProgress.some(id => id === userId)} // если в массиве хоть одна id равна id пользователя -блокируем кнопку 
+                            onClick={() => {
+                                unFollowUser(userId);// при клике - отписываемся
+                            }}>Un follow</button>
+
+                        : <button disabled={followingProgress.some(id => id === userId)}
+                            onClick={() => {
+                                followUser(userId);
+                            }} >Follow </button>}
                 </div>
             </div>
             <div className={css.userData}>

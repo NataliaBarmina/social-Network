@@ -1,4 +1,3 @@
-
 import React from "react";
 import { connect } from "react-redux";
 import Users from "./users";
@@ -10,13 +9,14 @@ import { getUsers, getPageSize, getPortionSize, getTotalUsersCount, getCurrentPa
 class UserContainer extends React.Component {
 
     componentDidMount() {
-        const { currentPage, pageSize } = this.props;
-        this.props.requestUsers(currentPage, pageSize);
+        const { currentPage, pageSize, requestUsers } = this.props;
+        requestUsers(currentPage, pageSize); // запрашиваем пользователей для текущей страницы
     }
+
     onPageChange = (page) => {
         const { setCurrentPage, pageSize, requestUsers } = this.props;
-        setCurrentPage(page);
-        requestUsers(page, pageSize);
+        setCurrentPage(page);         // устанавливаем текущую страницу
+        requestUsers(page, pageSize); // запрашиваем пользователей для текущей страницы
     }
 
     render() {
@@ -52,7 +52,7 @@ export default compose(
             unFollowUser,
             followUser
         }),
-    WithAuthRedirect,
+    WithAuthRedirect, //если нет аутентификации - переходим на /login
 )(UserContainer)
 
 

@@ -4,11 +4,11 @@ import photoUser from '../../REDUX/pictures/man.png'
 import PaginatorWithHooks from "../../common/paginator/paginatorWithHooks";
 import Preloader from "../../common/preloader/preloader";
 
-const Users = ({ currentPage, totalItemsCount, pageSize, portionSize, onPageChange, users, setCurrentPage, ...props }) => {
+const Users = ({ currentPage, totalItemsCount, pageSize, portionSize, onPageChange, users, setCurrentPage, isFetching, followingProgress, followUser, unFollowUser }) => {
 
     return (
         < div >
-            {props.isFetching ? <Preloader /> : null}
+            {isFetching ? <Preloader /> : null} {/*если идет загрузка показываем прелоадер */}
 
             <PaginatorWithHooks currentPage={currentPage} setCurrentPage={setCurrentPage} totalItemsCount={totalItemsCount} pageSize={pageSize} portionSize={portionSize} onPageChange={onPageChange} />
 
@@ -16,12 +16,14 @@ const Users = ({ currentPage, totalItemsCount, pageSize, portionSize, onPageChan
                 {
                     users.map(user =>
                         <User
-                            {...props}
                             key={user.id}
                             userId={user.id}
                             name={user.name}
                             followed={user.followed}
                             photoUser={user.photos.small != null ? user.photos.small : photoUser}
+                            followingProgress={followingProgress}
+                            followUser={followUser}
+                            unFollowUser={unFollowUser}
                         >
                         </User>
                     )
