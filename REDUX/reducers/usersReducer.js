@@ -11,13 +11,12 @@ const TOGGLE_FOLLOWING_PROGRESS = 'usersPage/TOGGLE-FOLLOWING-PROGRESS'
 
 let initialState = {
     users: [],
-    pageSize: 100,
-    totalItemsCount: 0,
-    currentPage: 1,
-    portionSize: 100,
-    isFetching: false,
-    followingProgress: [],
-
+    pageSize: 100,        // сколько пользователей на странице мы хотим
+    totalItemsCount: 0,   //общее кол-во пользователей, данные приходят с сервера
+    currentPage: 1,       // номер текущей страницы
+    portionSize: 100,     // размер порции в пагинаторе
+    isFetching: false,    // идет ли ПРОЦЕСС загрузки данных (первоначально данные не загружаются) 
+    followingProgress: [],// массив с id пользователей, на которорых мы подписываемся/отп-ся
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -27,6 +26,8 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: updateObjectInArray(state.users, action.userId, 'id', { followed: true })
+                // создает новую копию  объекта и заменяет старое свойство followed новым, если id пользователя равно id приходящим в action:
+
                 // users: state.users.map(user => {
                 //     if (user.id === action.userId) {
                 //         return { ...user, followed: true }
@@ -39,12 +40,6 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: updateObjectInArray(state.users, action.userId, 'id', { followed: false })
-                // users: state.users.map(user => {
-                //     if (user.id === action.userId) {
-                //         return { ...user, followed: false }
-                //     }
-                //     return user;
-                // }),
             }
 
         case SET_USERS:
@@ -62,9 +57,9 @@ const usersReducer = (state = initialState, action) => {
         case TOGGLE_FOLLOWING_PROGRESS:
             return {
                 ...state,
-                followingProgress: action.followingProgress ?
-                    [...state.followingProgress, action.userId]
-                    : state.followingProgress.filter(id => id !== action.userId)
+                followingProgress: action.followingProgress ?    // пришла подписка?
+                    [...state.followingProgress, action.userId]  // получаем  id того пользователя, на которого мы подписываемся/отп-ся
+                    : state.followingProgress.filter(id => id !== action.userId)// отфильтровываем ненужного пользователя (пропускаем только ту id, которая не равна id из action
             }
 
         default: return state;
@@ -72,33 +67,33 @@ const usersReducer = (state = initialState, action) => {
 
 }
 
-export const follow = (userId) => ({ type: FOLLOW, userId });//
-export const unFollow = (userId) => ({ type: UNFOLLOW, userId });//
-export const setUsers = (users) => ({ type: SET_USERS, users })//
-export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage })//
-export const setUserCount = (totalCount) => ({ type: SET_TOTAL_USERS_COUNT, totalCount })//
-export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching }) //
-export const toggleFollowingProgress = (followingProgress, userId) => ({ type: TOGGLE_FOLLOWING_PROGRESS, followingProgress, userId })//
+export const follow = (userId) => ({ type: FOLLOW, userId });
+export const unFollow = (userId) => ({ type: UNFOLLOW, userId });
+export const setUsers = (users) => ({ type: SET_USERS, users })
+export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage })
+export const setUserCount = (totalCount) => ({ type: SET_TOTAL_USERS_COUNT, totalCount })
+export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
+export const toggleFollowingProgress = (followingProgress, userId) => ({ type: TOGGLE_FOLLOWING_PROGRESS, followingProgress, userId })
 
-export const requestUsers = (page, pageSize) => {
+export const requestUsers = (page, pageSize) => { // запрос пользователя
     return async (dispatch) => {
-        dispatch(toggleIsFetching(true));
-        dispatch(setCurrentPage(page));
+        dispatch(toggleIsFetching(true));         // процесс загрузки идет
+        dispatch(setCurrentPage(page));           // устанавливаем текущую страницу
 
-        let response = await userAPI.getUsers(page, pageSize)
-        dispatch(toggleIsFetching(false));
-        dispatch(setUsers(response.items));
-        dispatch(setUserCount(response.totalCount));
+        let response = await userAPI.getUsers(page, pageSize) //запрос пользователя на сервер 
+        dispatch(toggleIsFetching(false));                    // процесса загрузки нет
+        dispatch(setUsers(response.items));                   // устанавливаем пользователей
+        dispatch(setUserCount(response.totalCount));          // устанавливаем общее количество пользоват
     }
 }
 
 const followUnFollowFlow = async (dispatch, id, apiMethod, actionCreator) => {//общая функция чтобы избежать дублирования кода
-    dispatch(toggleFollowingProgress(true, id));
+    dispatch(toggleFollowingProgress(true, id)); //пришла подписка, получаем id
     let response = await apiMethod(id);
     if (response.data.resultCode === 0) {
         dispatch(actionCreator(id))
     }
-    dispatch(toggleFollowingProgress(false, id));
+    dispatch(toggleFollowingProgress(false, id)); // отфильтровываем ненужного пользователя (пропускаем только ту id, которая не равна id из action
 }
 
 export const unFollowUser = (id) => {
