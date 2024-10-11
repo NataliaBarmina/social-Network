@@ -4,7 +4,7 @@ const instance = axios.create({
     withCredentials: true,  // объект настройки запроса, т.е мы отправляем авторизационную cookie 
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        'API-KEY': "9d79ac28-606f-4757-89d4-f55d9bea2fa4"
+        'API-KEY': "32dd19a0-b402-4036-8d06-08b87898507d"
     },
 });
 
