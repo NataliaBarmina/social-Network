@@ -29,43 +29,9 @@ export const createField = (placeholder, name, validators, component, props = {}
     </div>
 }
 
-
-export const createInput = (type, placeholder, register, valueOfRequired, value, message, text) => {
-    return (
-        <div>
-            <input type={type} placeholder={placeholder}
-                {...register(type, {
-                    required: valueOfRequired,
-                    maxLength: {
-                        value: value,
-                        massage: message,
-                    }
-                })}>
-            </input>{text}
-        </div >
-    )
-}
-
-export const createTextarea = (type, register, valueOfRequired, value, message) => {
-    return (
-        <div>
-            <textarea
-                {...register(type, {
-                    required: valueOfRequired,
-                    maxLength: {
-                        value: value,
-                        massage: message,
-                    }
-                })
-                } >
-            </textarea>
-        </div >
-    )
-}
-
 export const createFields = (componentType, type, placeholder, register, valueOfRequired, value, message, text) => {
     const registerOfFields = {
-        ...register(type, {
+        ...register(type, {            // передается 2 параметра - имя поля и объект валидации
             required: valueOfRequired,
             maxLength: {
                 value: value,

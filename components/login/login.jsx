@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { login } from "../../REDUX/reducers/authReducer";
 import { Navigate } from "react-router-dom";
 import css from '../../common/formsControls/formControls.module.css'
-import { createInput } from "../../common/formsControls/formControls";
 import { createFields } from "../../common/formsControls/formControls";
 
 const Login = ({ captchaURL, ...props }) => {
@@ -30,16 +29,14 @@ const Login = ({ captchaURL, ...props }) => {
     return <div>
         <h1>LOGIN</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-
-            {createInput("email", "email", register, "это поле обязательно", 20, "не более 20 символов")}
-            {createInput("password", "password", register, "это поле обязательно", 20, "не более 20 символов")}
-
+            {createFields('input', "email", "email", register, "это поле обязательно", 20, "не более 20 символов")}
+            {createFields('input', "password", "password", register, "это поле обязательно", 20, "не более 20 символов")}
             {createFields('input', "checkbox", "", register, "", null, "", "remember me")}
 
             <div>
                 {/*каптча и  поле ввода каптчи  */}
                 {captchaURL && <img src={captchaURL} alt="#" />}
-                {captchaURL && createInput("", 'введите символы', register, "", null, "")}
+                {captchaURL && createFields('input', "", "", register, "", null, "")}
             </div>
 
             <div>

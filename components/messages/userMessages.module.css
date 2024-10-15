@@ -16,3 +16,8 @@
     display: inline-block;
     width: 60%;
 }
+
+.messagesContainer {
+    width: 80%;
+    padding: 2rem;
+}

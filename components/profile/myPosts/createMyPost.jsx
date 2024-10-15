@@ -1,6 +1,7 @@
 import React from "react";
 import css from './createMyPost.module.css';
 import { useForm } from 'react-hook-form';
+import { createFields } from "../../../common/formsControls/formControls";
 
 const CreateMyPost = ({ addNewPostActionCreator }) => {
 
@@ -22,16 +23,7 @@ const CreateMyPost = ({ addNewPostActionCreator }) => {
         <div className={css.postForm}>
             <form onSubmit={handleSubmit(onAddPost)}>
 
-                <textarea
-                    {...register("myPost", {   // передается 2 параметра - имя поля и объект валидации
-                        required: "поле обязательно к заполнению",
-                        maxLength: {
-                            value: 50,
-                            message: "максимальная длина 50символов"
-                        }
-                    })}
-                ></textarea>
-
+                {createFields('textarea', "myPost", "", register, "поле обязательно к заполнению", 50, "максимальная длина 50символов")}
 
                 <div>
                     {errors.myPost && <p className={css.red}>{errors.myPost.message || 'Error'}</p>}
