@@ -2,8 +2,6 @@ import React from "react";
 import css from './createMyPost.module.css';
 import { useForm } from 'react-hook-form';
 
-
-
 const CreateMyPost = ({ addNewPostActionCreator }) => {
 
     const onAddPost = (values) => {
@@ -23,7 +21,8 @@ const CreateMyPost = ({ addNewPostActionCreator }) => {
     return (
         <div className={css.postForm}>
             <form onSubmit={handleSubmit(onAddPost)}>
-                <textarea className={css.input}
+
+                <textarea
                     {...register("myPost", {   // передается 2 параметра - имя поля и объект валидации
                         required: "поле обязательно к заполнению",
                         maxLength: {
@@ -32,6 +31,8 @@ const CreateMyPost = ({ addNewPostActionCreator }) => {
                         }
                     })}
                 ></textarea>
+
+
                 <div>
                     {errors.myPost && <p className={css.red}>{errors.myPost.message || 'Error'}</p>}
                 </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { createFields } from "../../common/formsControls/formControls";
 
 // import { Field, reduxForm } from "redux-form";
 // import { Textarea } from "../../common/formsControls/formControls";
@@ -37,15 +38,20 @@ const CreateMyMessage = ({ sendMessageCreator }) => {
     }
     return (
         <form onSubmit={handleSubmit(addNewMessage)}>
-            <textarea {...register('myMessage', {
+            {/* <textarea {...register('myMessage', {
                 required: "поле обязательно к заполнению",
                 maxLength: {
                     value: 50,
                     message: "максимальная длина 50 символов"
                 }
-            })}></textarea>
+            })}></textarea> */}
+
+            {createFields('textarea', 'myMessage', "", register, "поле обязательно к заполнению", 50, "максимальная длина 50 символов")}
+
             {errors.myMessage && <p style={{ color: 'red' }}>{errors.myMessage.message || 'error'}</p>}
             <button disabled={!isValid}>Send</button>
+
+
         </form>
     )
 }
