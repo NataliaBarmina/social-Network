@@ -1,0 +1,12 @@
+.postsContainer {
+    background-size: cover;
+    font-weight: 900;
+    padding: 1rem 0rem 2rem 2rem;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.header {
+    font-size: 2rem;
+    text-align: center;
+}

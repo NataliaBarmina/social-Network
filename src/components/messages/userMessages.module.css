@@ -1,0 +1,18 @@
+.usersMessages {
+    padding: 2rem;
+    font-size: 1.3rem;
+}
+
+.names {
+    display: inline-block;
+    width: 20%;
+}
+
+.names a:hover {
+    color: blue;
+}
+
+.messages {
+    display: inline-block;
+    width: 60%;
+}

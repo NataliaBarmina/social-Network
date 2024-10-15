@@ -1,0 +1,33 @@
+.postForm {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    width: 100%;
+    margin-bottom: 1rem;
+    border: 3px solid rgb(150, 179, 170);
+    padding: 1.1rem;
+    font-size: 1.2rem;
+}
+
+.input::-webkit-input-placeholder {
+    padding-left: 1rem;
+
+}
+
+.postForm div {
+    text-align: end;
+}
+
+.button {
+    background-color: rgb(78, 108, 144);
+    padding: 1rem 2rem;
+    border-radius: 15%;
+    border: 3px solid rgb(78, 108, 144);
+}
+
+.red {
+    color: red;
+}
