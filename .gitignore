@@ -2,7 +2,6 @@
 
 # dependencies
 node_modules/
-node-v20.13.1-linux-x64/
 /.pnp
 .pnp.js
 
