@@ -6,6 +6,7 @@ import { getProfileUser, getStatus, updateStatus, savePhoto, saveProfile, addErr
 import { useParams } from "react-router-dom";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
 import ProfileViewWithHooks from "./profileViewWithHooks";
+import PostFormContainer from "../myPosts/postFormContainer"
 
 
 export function withRouter(Children) { //создаем hoc, оборачиваем ребенка - View
@@ -44,14 +45,18 @@ class View extends PureComponent { //пропускает повторные р�
 
         return (
             <div >
-                <ProfileViewWithHooks profile={this.props.profile}
-                    savePhoto={this.props.savePhoto}
-                    isOwner={!this.props.match.params.userId} // id = undefined - то это пользователь 
-                    status={this.props.status}
-                    updateStatus={this.props.updateStatus}
-                    saveProfile={this.props.saveProfile}
-                    error={this.props.error}
-                    addError={this.props.addError} />
+                <div>
+                    <ProfileViewWithHooks profile={this.props.profile}
+                        savePhoto={this.props.savePhoto}
+                        isOwner={!this.props.match.params.userId} // id = undefined - то это пользователь 
+                        status={this.props.status}
+                        updateStatus={this.props.updateStatus}
+                        saveProfile={this.props.saveProfile}
+                        error={this.props.error}
+                        addError={this.props.addError} />
+
+                    {!this.props.match.params.userId && <PostFormContainer />}
+                </div>
             </div>
         )
     }

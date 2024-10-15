@@ -27,3 +27,7 @@
     border-radius: 15%;
     border: 3px solid rgb(78, 108, 144);
 }
+
+.red {
+    color: red;
+}

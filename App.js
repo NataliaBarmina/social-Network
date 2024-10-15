@@ -8,8 +8,8 @@ import { Navigate } from "react-router-dom";
 
 import Preloader from "./common/preloader/preloader.jsx";
 import NavBar from "./components/navbar/navbar.jsx";
-import Profile from "./components/profile/profile.jsx";
 import HeaderContainer from "./components/header/headerContainer.jsx";
+import ProfileViewContainer from './components/profile/profileView/profileViewContainer.jsx'
 import './App.css';
 
 const Login = withSuspense(lazy(() => import("./components/login/login.jsx")));// так работает когда используется <Routes/>
@@ -48,7 +48,7 @@ class App extends React.Component {
             <Suspense fallback={Preloader}> {/*показывается элемент, пока происходит загрузка компонента */}
 
               <Routes>
-                <Route path='/profile/:userId?' element={<Profile />} /> {/* получаем идишник пользователя*/}
+                <Route path='/profile/:userId?' element={<ProfileViewContainer />} /> {/* получаем идишник пользователя*/}
                 <Route path='/login' element={<Login />} />
                 <Route path='/users' element={<UsersContainer />} />
                 <Route path='/messages' element={<Messages />} />
